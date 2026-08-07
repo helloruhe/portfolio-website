@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cinzel+Decorative:wght@400;700&display=swap');
 @import 'tailwindcss';
 
-/* @theme {
+@theme {
   --color-parchment: #e8dfc8;
   --color-parchment-dim: #c4b99a;
   --color-gold: #c9a84c;
@@ -12,10 +12,15 @@
   --color-stone-light: #252018;
   --color-stone-border: #3a3228;
   --color-ember: #c44b2a;
+
+  --color-muted: #4a4038;
+  --color-hover: #e8c974;
+  --color-click: #c9a84c;
+
   --font-display: 'Cinzel Decorative', 'Cinzel', serif;
   --font-heading: 'Cinzel', serif;
   --font-body: 'EB Garamond', Georgia, serif;
-} */
+}
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -30,4 +35,36 @@ body {
   color: #e8dfc8;
   font-family: 'EB Garamond', Georgia, serif;
   margin: 0;
+}
+
+@layer components {
+  .glass {
+    background-color: color-mix(in srgb,var(--color-stone) 50%, transparent);
+    backdrop-filter: blur(15px);
+    border: 1px solid color-mix(in srgb,var(--color-stone-light) 50%, transparent);
+  }
+
+  .glass-strong {
+    background-color: color-mix(in srgb,var(--color-stone) 80%, transparent);
+    backdrop-filter: blur(26px);
+    border: 1px solid color-mix(in srgb,var(--color-stone-light) 60%, transparent);
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.7s ease-out both;
+  }
 }

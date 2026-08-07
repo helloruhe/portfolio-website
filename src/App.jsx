@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Navbar } from "@/layout/Navbar";
 import { Hero } from "@/sections/Hero";
 // import { About } from "@/sections/About";
@@ -8,7 +8,7 @@ import { Hero } from "@/sections/Hero";
 
 function App() {
   return (
-    <><div className="min-h-screen overlfow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar/>
       <main>
         <Hero />
@@ -17,7 +17,7 @@ function App() {
         <Samples />
         <Contact /> */}
       </main>
-    </div></>
+    </div>
   )
 }
 
