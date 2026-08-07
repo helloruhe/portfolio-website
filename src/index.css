@@ -45,7 +45,7 @@ body {
   }
 
   .glass-strong {
-    background-color: color-mix(in srgb,var(--color-stone) 80%, transparent);
+    background-color: color-mix(in srgb,var(--color-stone) 75%, transparent);
     backdrop-filter: blur(26px);
     border: 1px solid color-mix(in srgb,var(--color-stone-light) 60%, transparent);
   }
