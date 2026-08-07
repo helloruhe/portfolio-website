@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navbar } from "@/layout/Navbar";
 import { Hero } from "@/sections/Hero";
-// import { Projects } from "@/sections/Projects";
+import { Projects } from "@/sections/Projects";
 // import { Samples } from "@/sections/Samples";
 // import { Contact } from "@/sections/Contact";
 
@@ -11,8 +11,8 @@ function App() {
       <Navbar/>
       <main>
         <Hero />
-        {/* <Projects />
-        <Samples />
+        <Projects />
+        {/* <Samples />
         <Contact /> */}
       </main>
     </div>
