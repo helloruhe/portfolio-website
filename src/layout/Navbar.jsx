@@ -24,26 +24,26 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
+      className={`glass fixed top-0 left-0 right-0 transition-all duration-500 ${
         isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
       }  z-50`}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
         <a
           href="#"
-          className="text-xl font-bold tracking-tight hover:text-parchment-dim"
+          className="text-xl font-bold tracking-tight hover:text-gold"
         >
           Ariana Tranumn<span className="text-parchment-dim"></span>
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
-          <div className="glass rounded-full px-2 py-1 flex items-center gap-1">
+          <div className="rounded-full px-2 py-1 flex items-center gap-1">
             {navLinks.map((link, index) => (
               <a
                 href={link.href}
                 key={index}
-                className="px-4 py-2 text-sm text-muted-parchment-dim-dark rounded-full hover:bg-stone-light"
+                className="px-4 py-2 text-sm text-parchment-dim rounded-full hover:text-gold hover:bg-stone-border"
               >
                 {link.label}
               </a>
@@ -75,7 +75,7 @@ export const Navbar = () => {
                 href={link.href}
                 key={index}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-muted-foreground hover:text-foreground py-2"
+                className="text-lg text-parchment-dim hover:text-gold py-2"
               >
                 {link.label}
               </a>

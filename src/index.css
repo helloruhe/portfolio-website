@@ -49,6 +49,18 @@ body {
     backdrop-filter: blur(26px);
     border: 1px solid color-mix(in srgb,var(--color-stone-light) 60%, transparent);
   }
+
+  
+  .glow-text {
+    text-shadow: 0 0 30px
+      color-mix(in srgb, var(--color-parchment) 50%, transparent);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 20px
+        color-mix(in srgb, var(--color-parchment) 20%, transparent),
+      inset 0 0 20px color-mix(in srgb, var(--color-parchment) 5%, transparent);
+  }
 }
 
 @layer utilities {
@@ -66,5 +78,17 @@ body {
   }
   .animate-fade-in {
     animation: fade-in 0.7s ease-out both;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
   }
 }
