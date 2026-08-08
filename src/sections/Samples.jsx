@@ -1,28 +1,76 @@
+import { Button } from "@/assets/Button";
+import { HeaderText } from "@/assets/HeaderText";
+import magic from "/src/assets/images/magic-cover.png";
+import royalty from "/src/assets/images/royalty.jpg";
+
 export const Samples = () => {
-    return <section> </section>;
+    return (
+        <section className="items-center justify-center overflow-hidden xl:p-20 p-10">
+            <HeaderText text="Samples" />
+            <p className="text-center text-parchment-dim">Here are some samples of my writing and game design work.</p>
+            <div className="mx-auto mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {SAMPLES.map((sample) => {
+                    const hasLink = Boolean(sample.link && sample.link !== "#");
+
+                    return (
+                        <article
+                            key={sample.title}
+                            className="glass rounded-2xl p-6 flex flex-col gap-4 shadow-xl shadow-black/40 border border-gold/20"
+                        >
+                            <img
+                                src={sample.image}
+                                alt={sample.title}
+                                className="h-44 w-full rounded-xl object-cover"
+                            />
+                            <div className="space-y-2">
+                                <h3 className="text-xl font-semibold text-parchment">{sample.title}</h3>
+                                <p className="text-sm leading-relaxed text-parchment-dim">{sample.description}</p>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {sample.tags.map((tag) => (
+                                    <span key={tag} className="rounded-full border border-parchment-dim/40 px-3 py-1 text-sm text-parchment-dim">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            {hasLink ? (
+                                <Button size="sm" as="a" href={sample.link} target="_blank">
+                                    View
+                                </Button>
+                            ) : (
+                                <span className="inline-flex w-fit rounded-full border border-parchment-dim/30 px-3 py-2 text-sm text-parchment-dim">
+                                    Coming soon
+                                </span>
+                            )}
+                        </article>
+                    );
+                })}
+            </div>
+        </section>
+    );
 };
 
 const SAMPLES = [
     {
-        title: "CK3 Event Chain",
-        description: "Blablabla",
-        image: "/projects/project1.png",
+        title: "CK3 Event Chain: The Pretender",
+        description: "This CK3 design document outlines an event chain where the player must navigate a situation where someone is pretending to be their dead relative or predecessor. This entry also contains the localization text used for the events.",
+        image: royalty,
         tags: ["Narrative Design", "Game Design"],
-        link: "https://drive.google.com/file/d/15CRoYRN3W9Y3GmKxUZ4yqUbpcWIkR1Qs/view?usp=sharing",
+        link: "https://drive.google.com/file/d/1w9HW5Jt7FhjfN4rdx-bHm0AqqMAzGG4R/view?usp=sharing",
     },
     {
-        title: "CK3 Magic System",
-        description: "Blablabla",
-        image: "/projects/project1.png",
+        title: "CK3 Magic System Design Document",
+        description: "This CK3 design document outlines the magic system within the mod, detailing the spell trees, spells, and other system effects. This includes a roadmap and activity tracker with some links to Warcraft references.",
+        image: magic,
         tags: ["Game Design", "Systems Design"],
         link: "https://docs.google.com/spreadsheets/d/1cXFqsVwHekKiyrowB0PA5Ia4zvXuuxnBAoug8Iusrj8/edit?usp=sharing",
     },
     {
         title: "Basic NPC",
-        description: "Blablabla",
-        image: "/projects/project1.png",
+        description: "This is an NPC I wrote and designed in the context of The Elder Scrolls V: Skyrim. Contains the character's backstory, dialogue, and in-game schedule.",
+        image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/11/skyrim_logo.jpg",
         tags: ["Narrative Design", "Game Design", "Character Design"],
-        link: "#",
+        link: "https://docs.google.com/document/d/1o6m4oiDRBuwDWBcsgvcHCtcWNcGb-LS3yNElGLIAwOY/edit?usp=sharing",
     },
     // {
     //     title: "Screenplay",
