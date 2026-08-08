@@ -4,6 +4,7 @@ import { Hero } from "@/sections/Hero";
 import { Projects } from "@/sections/Projects";
 import { Samples } from "@/sections/Samples";
 import { Contact } from "@/sections/Contact";
+import { Footer } from "@/layout/Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <div id="contact"></div>
         <Contact /> 
       </main>
+      <Footer />
     </div>
   )
 }

@@ -66,11 +66,11 @@ const SAMPLES = [
         link: "https://docs.google.com/spreadsheets/d/1cXFqsVwHekKiyrowB0PA5Ia4zvXuuxnBAoug8Iusrj8/edit?usp=sharing",
     },
     {
-        title: "Basic NPC",
+        title: "Skyrim NPC",
         description: "This is an NPC I wrote and designed in the context of The Elder Scrolls V: Skyrim. Contains the character's backstory, dialogue, and in-game schedule.",
         image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/11/skyrim_logo.jpg",
         tags: ["Narrative Design", "Game Design", "Character Design"],
-        link: "https://docs.google.com/document/d/1o6m4oiDRBuwDWBcsgvcHCtcWNcGb-LS3yNElGLIAwOY/edit?usp=sharing",
+        link: "https://drive.google.com/file/d/1GoYG94gdMzygQOBxJ4vcCWZJQmUVsq0K/view?usp=sharing",
     },
     // {
     //     title: "Screenplay",
