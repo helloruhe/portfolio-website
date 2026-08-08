@@ -7,7 +7,7 @@ export const Hero = () => {
     return <section className="mx-auto relative min-h-screen flex items-center overflow-hidden xl:p-20 p-10 my-10">
 
         <div className="container h-full mx-auto">
-            <div className="flex flex-col lg:flex-row items-center justify-between p-3 lg:mx-50 mx-10">
+            <div className="flex flex-col lg:flex-row items-center justify-between p-3 lg:mx-30 mx-10 gap-10">
                 {/* Background */}
                 <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)_60%,rgba(0,0,0,0)_100%)]">
                     <img
