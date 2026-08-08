@@ -1,10 +1,60 @@
-import { HeaderText } from "@/assets/HeaderText";
+﻿import { HeaderText } from "@/assets/HeaderText";
 import { Button } from "@/assets/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// images
+import ck3Banner from "/src/assets/images/crusader_king.avif";
+import tsagaanSar from "/src/assets/images/tsagaan_sar.png";
+import petEagle from "/src/assets/images/pet_eagle_one.png";
+import legacyAdventurer from "/src/assets/images/legacy_adventurer.png";
+import goaBanner from "/src/assets/images/download.jpeg";
+import elune from "/src/assets/images/elune.png";
+import illidan from "/src/assets/images/illidan.png";
+import crisisGui from "/src/assets/images/crisisgui.png";
+
+const MEDIA_PER_PAGE_MOBILE = 1;
+const MEDIA_PER_PAGE_DESKTOP = 2;
+
+const getYouTubeVideoId = (url) => {
+    if (!url || typeof url !== "string") {
+        return null;
+    }
+
+    const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+    if (watchMatch?.[1]) {
+        return watchMatch[1];
+    }
+
+    const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+    if (shortMatch?.[1]) {
+        return shortMatch[1];
+    }
+
+    const embedMatch = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
+    if (embedMatch?.[1]) {
+        return embedMatch[1];
+    }
+
+    return null;
+};
+
+const getYouTubeEmbedUrl = (url) => {
+    const videoId = getYouTubeVideoId(url);
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+};
 
 export const Projects = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [mediaPage, setMediaPage] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const [expandedMediaIndex, setExpandedMediaIndex] = useState(null);
     const currentProject = PROJECTS[currentIndex];
+    const mediaPerPage = isMobile ? MEDIA_PER_PAGE_MOBILE : MEDIA_PER_PAGE_DESKTOP;
+    const galleryMedia = (currentProject.gallery || []).filter((media) => media?.src);
+    const mediaPageCount = Math.max(1, Math.ceil(galleryMedia.length / mediaPerPage));
+    const mediaStartIndex = mediaPage * mediaPerPage;
+    const visibleMedia = galleryMedia.slice(mediaStartIndex, mediaStartIndex + mediaPerPage);
+    const expandedMedia = expandedMediaIndex !== null ? galleryMedia[expandedMediaIndex] : null;
 
     const handleNext = () => {
         setCurrentIndex((prev) => (prev + 1) % PROJECTS.length);
@@ -14,11 +64,75 @@ export const Projects = () => {
         setCurrentIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
     };
 
-    return <section className="items-center justify-center overflow-hidden xl:p-20 p-10 my-10"> 
+    const handleMediaNext = () => {
+        setMediaPage((prev) => (prev + 1) % mediaPageCount);
+    };
+
+    const handleMediaPrev = () => {
+        setMediaPage((prev) => (prev - 1 + mediaPageCount) % mediaPageCount);
+    };
+
+    const handleOpenMedia = (mediaIndex) => {
+        setExpandedMediaIndex(mediaIndex);
+    };
+
+    const handleCloseMedia = () => {
+        setExpandedMediaIndex(null);
+    };
+
+    useEffect(() => {
+        setMediaPage(0);
+    }, [currentIndex]);
+
+    useEffect(() => {
+        setExpandedMediaIndex(null);
+    }, [currentIndex, mediaPage]);
+
+    useEffect(() => {
+        const mobileQuery = window.matchMedia("(max-width: 639px)");
+
+        const updateIsMobile = () => {
+            setIsMobile(mobileQuery.matches);
+        };
+
+        updateIsMobile();
+        mobileQuery.addEventListener("change", updateIsMobile);
+
+        return () => {
+            mobileQuery.removeEventListener("change", updateIsMobile);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (mediaPage > mediaPageCount - 1) {
+            setMediaPage(Math.max(0, mediaPageCount - 1));
+        }
+    }, [mediaPage, mediaPageCount]);
+
+    useEffect(() => {
+        if (expandedMediaIndex === null) {
+            return;
+        }
+
+        const handleEscape = (event) => {
+            if (event.key === "Escape") {
+                handleCloseMedia();
+            }
+        };
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+            window.removeEventListener("keydown", handleEscape);
+        };
+    }, [expandedMediaIndex]);
+
+    return <section className="items-center justify-center overflow-hidden xl:p-20 p-10"> 
         <HeaderText text="Projects"/>
         <p className="text-center text-parchment-dim">Here are some of the projects I have worked on, both professional and personal.<br /><em>Note: I am also working on the <a href="https://asgc.gg/" className="text-gold hover:underline" target="_blank">ASGC 2026 Game Jam!</a></em></p>
+        {/* Main Project Section */}
         <div className="flex flex-col items-center gap-5 m-5">
-            <div className="glass rounded-2xl flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black/50 w-full max-w-2xl">
+            <div className="glass rounded-2xl flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black/50 w-full max-w-6xl">
                 {currentProject.texture && <img src={currentProject.texture} alt={currentProject.title} className="w-full rounded-lg" />}
                 <div className="border-b border-gold/30 pb-3 mb-2">
                     <p className="text-parchment text-lg font-bold">{currentProject.title}</p>
@@ -32,6 +146,13 @@ export const Projects = () => {
                         <span className="text-parchment-dim text-sm uppercase tracking-wide">Studio</span>
                         <p className="text-parchment text-sm font-medium">{currentProject.studio}</p>
                     </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                    {currentProject.genres.map((genre, genreIndex) => (
+                        <button key={genreIndex} className="px-3 py-1 bg-gold/20 border border-parchment-dim text-parchment-dim rounded-lg hover:bg-gold/30 transition-colors text-lg glow-text">
+                            {genre} 
+                        </button>
+                    ))}
                 </div>
                 <p className="text-parchment text-sm leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: currentProject.blurb }} />
                 <div className="flex flex-wrap gap-2">
@@ -54,7 +175,112 @@ export const Projects = () => {
                     Next →
                 </button>
             </div>
+            {/* In-depth Project Details Section */}
+            <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 w-full max-w-6xl">
+                {/* Gallery Carousel */}
+                {currentProject.gallery && currentProject.gallery.length > 0 && (
+                    <div className="flex flex-col gap-4">
+                        {mediaPageCount > 1 && (
+                            <div className="flex items-center justify-between">
+                                <button onClick={handleMediaPrev} className="text-sm px-3 py-1 text-parchment-dim hover:text-gold transition-colors">
+                                    ← Previous
+                                </button>
+                                <span className="text-parchment-dim text-sm">
+                                    {mediaPage + 1} / {mediaPageCount}
+                                </span>
+                                <button onClick={handleMediaNext} className="text-sm px-3 py-1 text-parchment-dim hover:text-gold transition-colors">
+                                    Next →
+                                </button>
+                            </div>
+                        )}
+                        <div className="flex gap-4 pb-2">
+                            {visibleMedia.map((media, mediaIndex) => (
+                                (() => {
+                                    const embedUrl = getYouTubeEmbedUrl(media.src);
+
+                                    return (
+                                <div
+                                    key={mediaStartIndex + mediaIndex}
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => handleOpenMedia(mediaStartIndex + mediaIndex)}
+                                    onKeyDown={(event) => {
+                                        if (event.key === "Enter" || event.key === " ") {
+                                            event.preventDefault();
+                                            handleOpenMedia(mediaStartIndex + mediaIndex);
+                                        }
+                                    }}
+                                    className="flex flex-col gap-3 w-full min-w-[260px] flex-1 cursor-pointer hover:opacity-90 transition-opacity"
+                                >
+                                        {embedUrl ? (
+                                            <iframe
+                                                src={embedUrl}
+                                                title={media.caption || "YouTube video"}
+                                                className="w-full aspect-video rounded-lg"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                allowFullScreen
+                                            />
+                                        ) : (
+                                            <img src={media.src} alt={media.caption} className="w-full rounded-lg" />
+                                        )}
+                                        <p className="text-parchment-dim text-base text-center">{media.caption}</p>
+                                        {media.link && media.link.trim().length > 0 && (
+                                            <a
+                                                href={media.link}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                onClick={(event) => event.stopPropagation()}
+                                                className="text-gold text-sm text-center hover:underline"
+                                            >
+                                                {media.link_label || "View media"}
+                                            </a>
+                                        )}
+                                    </div>
+                                    );
+                                })()
+                            ))}
+                        </div>
+                    </div>
+                )}
+                <p className="text-parchment text-3xl font-bold">{currentProject.title}</p>
+                <p className="text-parchment text-lg leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: currentProject.description }} />
+            </div>
         </div>
+        {expandedMedia && (
+            <div className="fixed inset-0 z-50 bg-black/80 p-4 sm:p-8" onClick={handleCloseMedia}>
+                <div className="mx-auto w-full max-w-5xl flex flex-col gap-4" onClick={(event) => event.stopPropagation()}>
+                    <button
+                        type="button"
+                        onClick={handleCloseMedia}
+                        className="self-end text-parchment-dim hover:text-gold transition-colors text-sm"
+                    >
+                        Close ×
+                    </button>
+                    {getYouTubeEmbedUrl(expandedMedia.src) ? (
+                        <iframe
+                            src={getYouTubeEmbedUrl(expandedMedia.src)}
+                            title={expandedMedia.caption || "YouTube video"}
+                            className="w-full aspect-video rounded-lg"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                        />
+                    ) : (
+                        <img src={expandedMedia.src} alt={expandedMedia.caption} className="w-full rounded-lg max-h-[75vh] object-contain" />
+                    )}
+                    <p className="text-parchment-dim text-base text-center">{expandedMedia.caption}</p>
+                    {expandedMedia.link && expandedMedia.link.trim().length > 0 && (
+                        <a
+                            href={expandedMedia.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-gold text-sm text-center hover:underline"
+                        >
+                            {expandedMedia.link_label || "View media"}
+                        </a>
+                    )}
+                </div>
+            </div>
+        )}
     </section>;
 };
 
@@ -65,100 +291,73 @@ const PROJECTS = [
         studio: "Paradox Interactive",
         role: "Game/Narrative Designer",
         blurb: "Shipped player-facing content and in-game systems for one of the most complex grand strategy games in the genre. <br /><br />Credited on the <strong>All Under Heaven</strong> and <strong>Khans of the Steppe</strong> DLCs.",
+        genres: ["Grand Strategy", "Historical", "RPG"],
         tags: ["Game Design", "Narrative Design", "Writing"],
         link: "https://www.paradoxinteractive.com/games/crusader-kings-iii/",
         link_label: "Game Link",
-        texture: "",
+        texture: ck3Banner,
         description: "Crusader Kings III is a grand strategy game developed by Paradox Interactive, focusing on the medieval period and complex political and dynastic systems.<br /><br />As Game Designer on <strong>All Under Heaven</strong> and <strong>Khans of the Steppe</strong> DLCs, I created immersive experiences for players via in game decisions, events, and other narrative content. I also collaborated with an AA-level studio team; programmers, designers and artists to ensure gameplay quality.",
         gallery: [
             {
-                src: "",
-                caption: "Gallery Media Caption"
+                src: tsagaanSar,
+                caption: "Tsagaan Sar opening event — a custom variation on the feast activity",
+                link: "https://forum.paradoxplaza.com/forum/developer-diary/dev-diary-167-the-greatest-of-them-all.1733816/",
+                link_label: "Developer Diary",
+            },
+            {
+                src: petEagle,
+                caption: "Pet eagle event — a unique companion available to steppe rulers",
+            },
+            {
+                src: legacyAdventurer,
+                caption: "Legacy of the Adventurer decision — sandbox decision for good-aligned players",
             }
         ],
-    }
+    },
+    {
+        title: "Warcraft: Guardians of Azeroth Reforged 2",
+        studio: "Independent Mod Team",
+        role: "Team Lead and Developer",
+        genres: ["Grand Strategy", "Fantasy", "RPG"],
+        tags: ["Game Design", "Narrative Design", "Writing", "Modding", "Systems Design"],
+        blurb: "A total conversion mod set in ABK's Warcraft universe, bringing the First War and Reign of Chaos to Crusader Kings III. <strong>60,000+ subscribers</strong> on Steam Workshop.<br /><br />Led team reorganization, established development standards, implemented new in-game systems, and contributed to flavorization efforts.",
+        link: "https://steamcommunity.com/sharedfiles/filedetails/?id=2949767945",
+        link_label: "Steam Workshop",
+        description: "As a designer for the mod, I've created player-facing content and in-game systems that enhance the Warcraft experience within Crusader Kings III. This includes designing events, decisions, and narrative content that align with the lore and mechanics of the Warcraft universe, but also allows for sandbox-like gameplay for players to create their own variation of Warcraft within Crusader Kings III.<br /><br />As team lead, I've created and enforced development standards, direct release management, and coordinated the efforts of the development team to ensure high-quality content and smooth project progression. I've also organized community events and giveaways in our discord with over <strong>8,000 members</strong>, and spoken at ModCon on behalf of the team.",
+        texture: goaBanner,
+        gallery: [
+            {
+                src: "https://www.youtube.com/watch?v=ox2e43IjZLY",
+                caption: "Trailer showcasing the mod's features and gameplay",
+            },
+            {
+                src: elune,
+                caption:
+                    "An event displaying the schisms between Elven culture in Warcraft, integrated with CK3 Mechanics",
+            },
+            {
+                src: illidan,
+                caption:
+                    "GUI showcasing the in-game magic system inspired by Warcraft spells",
+            },
+            {
+                src: crisisGui,
+                caption:
+                    "A Crisis Event, expanding on Warcrafts' major lore events from a ruler's perspective",
+            },
+        ],
+    },
+    {
+        title: "Project: Cafe",
+        studio: "Sunday Studios",
+        role: "Game/Narrative Designer, Programmer",
+        genres: ["Simulation"],
+        tags: ["Game Design", "Narrative Design", "Programming", "Godot"],
+        blurb: "Project: Cafe is an upcoming game developed by a Student-led studio, Sunday Studios. More information to come soon!",
+        link: "https://www.sundaystudiosgames.com/",
+        link_label: "Studio Link",
+        description: "As a Game/Narrative Designer and Programmer on Project: Cafe, I am responsible for creating and designing engaging mini games, wrote emails to bring you in the world of the character with a tyrannical AI-loving boss!",
+        gallery: [
+        ],
+    },
 ];
-
-// const PROJECTS = {
-//     professional: [
-//         {
-//             title: "",
-//             subtitle: "Game Designer · Paradox Interactive · Aug. 2024 – Aug. 2025",
-//             tags: ["Paradox Script", "Game Design", "Systems Design", "UX"],
-//             desc: "",
-//             links: [
-//                 {
-//                     label: "Steam Page",
-//                     href: "",
-//                 },
-//             ],
-//             image: ck3Banner,
-//             gallery: [
-//                 {
-//                     src: tsagaanSar,
-//                     caption:
-//                         "Tsagaan Sar opening event — a custom variation on the feast activity",
-//                     href: "https://forum.paradoxplaza.com/forum/developer-diary/dev-diary-167-the-greatest-of-them-all.1733816/",
-//                 },
-//                 {
-//                     src: petEagle,
-//                     caption:
-//                         "Pet eagle event — a unique companion available to steppe rulers",
-//                 },
-//                 {
-//                     src: legacyAdventurer,
-//                     caption:
-//                         "Legacy of the Adventurer decision — sandbox decision for good-aligned players",
-//                 },
-//             ],
-//         },
-//     ],
-//     personal: [
-//         {
-//             title: "Warcraft: Guardians of Azeroth Reforged 2",
-//             subtitle:
-//                 "Developer · Crusader Kings III Total Conversion Mod · Oct. 2023 – Present",
-//             tags: ["Paradox Script", "Team Lead", "Game Systems", "Localization"],
-//             desc: "A total conversion mod set in Blizzard's Warcraft universe, bringing the First War and Reign of Chaos to Crusader Kings III. 59,000+ subscribers on Steam Workshop. Led team reorganization, established development standards, implemented new in-game systems, and contributed to flavorization efforts.",
-//             links: [
-//                 {
-//                     label: "Steam Workshop",
-//                     href: "https://steamcommunity.com/sharedfiles/filedetails/?id=2949767945",
-//                 },
-//             ],
-//             image: goaBanner,
-//             gallery: [
-//                 {
-//                     src: elune,
-//                     caption:
-//                         "An event displaying the schisms between Elven culture in Warcaft, integrated with CK3 Mechanics",
-//                 },
-//                 {
-//                     src: illidan,
-//                     caption:
-//                         "GUI showcasing the in-game magic system inspired by Warcraft spells",
-//                 },
-//                 {
-//                     src: crisisGui,
-//                     caption:
-//                         "A Crisis Event, expanding on Warcrafts' major lore events from a ruler's perspective",
-//                 },
-//             ],
-//         },
-//         {
-//             title: "Warcraft: Guardians of Azeroth Reforged 2",
-//             subtitle:
-//                 "Team Lead · Crusader Kings III Total Conversion Mod · Oct. 2023 – Present",
-//             tags: ["Paradox Script", "Game Systems", "Game Design", "Narrative Design"],
-//             desc: "A total conversion mod set in Blizzard's Warcraft universe, bringing the First War and Reign of Chaos to Crusader Kings III. 59,000+ subscribers on Steam Workshop. Led team reorganization, established development standards, implemented new in-game systems, and contributed to flavorization efforts.",
-//             links: [
-//                 {
-//                     label: "Steam Workshop",
-//                     href: "https://steamcommunity.com/sharedfiles/filedetails/?id=2949767945",
-//                 },
-//             ],
-//             image: goaBanner,
-//             gallery: [],
-//         }
-//     ],
-// }
