@@ -10,8 +10,12 @@ function App() {
     <div className="min-h-screen overflow-x-hidden">
       <Navbar/>
       <main>
+        <div id="about"></div>
         <Hero />
+        <div id="projects"></div>
         <Projects />
+        <div id="samples"></div>
+        <div id="contact"></div>
         {/* <Samples />
         <Contact /> */}
       </main>

@@ -31,9 +31,9 @@ export const Navbar = () => {
       <nav className="container mx-auto px-6 flex items-center justify-between">
         <a
           href="#"
-          className="text-xl font-bold tracking-tight hover:text-gold"
+          className="text-xl tracking-light hover:text-gold glow-text"
         >
-          Ariana Tranumn<span className="text-parchment-dim"></span>
+          Ariana Tranumn<br/><em>Game Designer and Developer</em><span className="text-parchment-dim"></span>
         </a>
 
         {/* Desktop Nav */}
@@ -50,7 +50,9 @@ export const Navbar = () => {
             ))}
             {/* Contact Button */}
             <div className="hidden md:block">
-            <Button size="sm">Contact Me</Button>
+            <a href="#contact">
+              <Button size="sm">Contact Me</Button>
+            </a>
             </div>
           </div>
         </div>
@@ -80,10 +82,12 @@ export const Navbar = () => {
                 {link.label}
               </a>
             ))}
-
-            <Button onClick={() => setIsMobileMenuOpen(false)}>
-              Contact Me
-            </Button>
+            
+            <a href="#contact">
+              <Button onClick={() => setIsMobileMenuOpen(false)}>
+                Contact Me
+              </Button>
+            </a>
           </div>
         </div>
       )}

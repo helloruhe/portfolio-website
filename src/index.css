@@ -92,3 +92,7 @@ body {
     animation-delay: 300ms;
   }
 }
+
+button {
+  cursor: pointer;
+}

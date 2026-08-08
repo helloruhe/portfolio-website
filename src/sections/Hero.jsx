@@ -5,18 +5,18 @@ import { HeaderText } from "@/assets/HeaderText";
 
 export const Hero = () => {
     return <section className="mx-auto relative min-h-screen flex items-center overflow-hidden xl:p-20 p-10 my-10">
-        {/* Background */}
-        <div className="absolute inset-0">
-            <img
-                src="https://cdnb.artstation.com/p/assets/images/images/096/607/169/4k/philipp-a-urlich-cpncept806-4.webp"
-                alt="Artwork by Philipp A. Urlich"
-                className="w-full h-full object-cover opacity-30"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
-        </div>
 
         <div className="container h-full mx-auto">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-5 p-3 mx-50">
+            <div className="flex flex-col lg:flex-row items-center justify-between p-3 lg:mx-50 mx-10">
+                {/* Background */}
+                <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)_60%,rgba(0,0,0,0)_100%)]">
+                    <img
+                        src="https://cdnb.artstation.com/p/assets/images/images/096/607/169/4k/philipp-a-urlich-cpncept806-4.webp"
+                        alt="Artwork by Philipp A. Urlich"
+                        className="w-full h-full object-cover opacity-40"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
+                </div>
                 {/* Photo */}
                 <div className="relative animate-fade-in animation-delay-300 relative glass rounded-full p-3 glow-border">
                     <div className="w-[250px] h-[250px] xl:w-[300px] xl:h-[300px]">
@@ -27,10 +27,10 @@ export const Hero = () => {
                 <div className="lg:text-left gap-5">
                     {/* Text */}
                     <h1 className="text-5xl glow-text md:text-6xl lg:text-7xl leading-tight animate-fade-in animation-delay-100">
-                        <span className="text-parchment ">About Me</span>
+                        <span className="text-parchment">About Me</span>
                     </h1>
                     <p className="text-lg text-parchment-dim max-w-lg animate-fade-in">
-                        holderplace
+                        Hi! My name is Ariana <em>(she/her)</em>. I am a <strong>Software Engineering</strong> student with a passion and interest in Game Development. I am a Game Designer with AA studio experience and an aspiring Narrative Designer.<br/><br/> I have also been writing since a young age, crafting narratives and worlds for my own stories and games. I have worked on <strong>Crusader Kings III</strong>, a grand strategy/RPG hybrid game set in the medieval period. I am also the team lead for <strong>Warcraft: Guardians of Azeroth II</strong>, a total conversion mod for Crusader Kings III.<br/><br/>
                     </p>
 
                     {/* Socials */}
@@ -43,9 +43,10 @@ export const Hero = () => {
                             <a
                                 key={idx}
                                 href={social.href}
-                                className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
+                                target="_blank"
+                                className="p-2 rounded-full glass hover:bg-primary/10 hover:bg-gold transition-all duration-300"
                             >
-                                {<social.icon className="w-5 h-5" />}
+                                {<social.icon className="w-5 h-5 " />}
                             </a>
                         ))}
                     </div>
@@ -85,7 +86,7 @@ export const Hero = () => {
                     <p className="text-sm text-muted-foreground">
                         <div className="grid grid-cols-3 gap-2">
                         {item.tags.map((itemtag, idx) => (
-                            <p className="rounded-full bg-stone-mid px-4 py-2 text-center hover:bg-gold/20">{itemtag}</p>
+                            <p className="rounded-full bg-stone-mid px-4 py-2 justify-center flex hover:bg-gold/20">{itemtag}</p>
                         ))}
                     </div>
                     </p>
@@ -121,15 +122,15 @@ const SKILLS = [
             "C++",
             "TypeScript",
             "JavaScript",
-            "Java",
-            "SQL",
             "Lua",
             "GDScript",
+            "HTML",
+            "CSS",
         ],
     },
     {   
         icon: Toolbox,
-        name: "Frameworks/Engines",
-        tags: [".NET", "WPF", "WinForms", "Godot", "Unity", "UE5"],
+        name: "Frameworks/Engines/Tools",
+        tags: [".NET", "WPF", "WinForms", "Godot", "Unity", "UE5", "Blender", "Figma", "SQL"],
     }
 ]
