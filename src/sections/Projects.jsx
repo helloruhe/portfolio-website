@@ -356,7 +356,7 @@ const PROJECTS = [
         blurb: "Project: Cafe is an upcoming game developed by a Student-led studio, Sunday Studios. More information to come soon!",
         link: "https://www.sundaystudiosgames.com/",
         link_label: "Studio Link",
-        description: "As a Game/Narrative Designer and Programmer on Project: Cafe, I am responsible for creating and designing engaging mini games, wrote emails to bring you in the world of the character with a tyrannical AI-loving boss!",
+        description: "As a Game/Narrative Designer and Programmer on Project: Cafe, I am responsible for creating and designing engaging mini games, and I wrote flavor text to bring you in the world of the character with a tyrannical AI-loving boss!",
         gallery: [
         ],
     },
