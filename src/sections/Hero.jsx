@@ -2,6 +2,7 @@ import { Mail, Download, Code2, Toolbox } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Button } from "@/assets/Button";
 import { HeaderText } from "@/assets/HeaderText";
+import myphoto from "@/assets/images/cute-pic.jpg";
 
 export const Hero = () => {
     return <section className="mx-auto relative min-h-screen flex items-center overflow-hidden xl:p-20 p-10 my-10">
@@ -20,7 +21,7 @@ export const Hero = () => {
                 {/* Photo */}
                 <div className="relative animate-fade-in animation-delay-300 relative glass rounded-full p-3 glow-border">
                     <div className="w-[250px] h-[250px] xl:w-[300px] xl:h-[300px]">
-                        <img src="./src/assets/images/cute-pic.jpg" className="w-full aspect-[10/10] object-cover rounded-full"></img>
+                        <img src={myphoto} className="w-full aspect-[10/10] object-cover rounded-full"></img>
                     </div>
                 </div>
 
