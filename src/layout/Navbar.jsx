@@ -33,7 +33,7 @@ export const Navbar = () => {
           href="#"
           className="text-xl tracking-light hover:text-gold glow-text"
         >
-          Ariana Tranumn<br/><em>Game Designer and Developer</em><span className="text-parchment-dim"></span>
+          Ariana Tranumn<br/><em>Game and Narrative Designer</em><span className="text-parchment-dim"></span>
         </a>
 
         {/* Desktop Nav */}
