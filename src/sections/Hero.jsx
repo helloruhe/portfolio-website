@@ -109,7 +109,7 @@ const EDUCATION = [
         degree: "BS, Game Programming",
         school: "Academy of Art University",
         year: "2024",
-        note: "Skills: C++, Level Design, Game Design",
+        note: "Transferred · Skills: C++, Level Design, Game Design",
     },
 ]
 
