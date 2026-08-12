@@ -55,6 +55,9 @@ const SAMPLES = [
         description: "This CK3 design document outlines an event chain where the player must navigate a situation where someone is pretending to be their dead relative or predecessor. This entry also contains the localization text used for the events.",
         image: "https://images.pexels.com/photos/16721215/pexels-photo-16721215.jpeg",
         tags: ["Narrative Design", "Game Design"],
+        description: "This CK3 design document outlines an event chain where the player must navigate a situation where someone is pretending to be their dead relative or predecessor to claim their titles. This entry also contains the localization (event) text used for the events.",
+        image: royalty,
+        tags: ["Narrative Design", "Game Design", "Writing"],
         link: "https://drive.google.com/file/d/1w9HW5Jt7FhjfN4rdx-bHm0AqqMAzGG4R/view?usp=sharing",
     },
     {
@@ -81,6 +84,27 @@ const SAMPLES = [
     {
         title: "CK3 Magic System Design Document",
         description: "This CK3 design document outlines the magic system within the mod, detailing the spell trees, spells, and other system effects. This includes a roadmap and activity tracker with some links to Warcraft references. This document is quite comprehensive and complex. Beware!",
+        image: magic,
+        tags: ["Game Design", "Systems Design"],
+        link: "https://docs.google.com/spreadsheets/d/1cXFqsVwHekKiyrowB0PA5Ia4zvXuuxnBAoug8Iusrj8/edit?usp=sharing",
+    },
+    {
+        title: "Skyrim NPC",
+        description: "An interesting NPC I designed in the context of The Elder Scrolls V: Skyrim. Contains the character's backstory, description, dialogue with options, and in-game schedule.",
+        image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/11/skyrim_logo.jpg",
+        tags: ["Narrative Design", "Game Design", "Character Design", "Writing"],
+        link: "https://drive.google.com/file/d/1GoYG94gdMzygQOBxJ4vcCWZJQmUVsq0K/view?usp=sharing",
+    },
+    // {
+    //     title: "Apotheosis",
+    //     description: "An original, sci-fi themed screenplay. In a world where robots have taken over, and one has even declared themselves a God, humans are forced into acts of desperation to survive. The story follows Tallulah, a young woman who has the rare chance to petition the mechanical Godhead to improve her family's living conditions.",
+    //     image: "/projects/project1.png",
+    //     tags: ["Writing"],
+    //     link: "#",
+    // },
+    {
+        title: "CK3 Magic System Design Document",
+        description: "This CK3 design document outlines the magic system within the mod, detailing the spell trees, spells, and other system effects. This includes a roadmap and activity tracker with some links to Warcraft references.",
         image: magic,
         tags: ["Game Design", "Systems Design"],
         link: "https://docs.google.com/spreadsheets/d/1cXFqsVwHekKiyrowB0PA5Ia4zvXuuxnBAoug8Iusrj8/edit?usp=sharing",

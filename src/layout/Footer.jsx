@@ -17,6 +17,7 @@
                             >
                                 Philipp A. Urlich
                             </a>
+                            <br/>All other assets belong to their respective owners.
                         </p>
                     </div>
                 </div>
