@@ -22,12 +22,12 @@ export const Samples = () => {
                                 className="h-44 w-full rounded-xl object-cover"
                             />
                             <div className="space-y-2">
-                                <h3 className="text-xl font-semibold text-parchment">{sample.title}</h3>
-                                <p className="text-sm leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: sample.description }}></p>
+                                <h3 className="text-2xl font-semibold text-parchment">{sample.title}</h3>
+                                <p className="text-md leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: sample.description }}></p>
                             </div>
                             <div className="mt-auto flex flex-wrap gap-2">
                                 {sample.tags.map((tag) => (
-                                    <span key={tag} className="rounded-full border border-parchment-dim/40 px-3 py-1 text-sm text-parchment-dim">
+                                    <span key={tag} className="rounded-full border border-parchment-dim/40 px-3 py-1 text-md text-parchment-dim">
                                         {tag}
                                     </span>
                                 ))}
@@ -37,7 +37,7 @@ export const Samples = () => {
                                     View
                                 </Button>
                             ) : (
-                                <span className="inline-flex w-fit self-start rounded-full border border-parchment-dim/30 px-3 py-2 text-sm text-parchment-dim">
+                                <span className="inline-flex w-fit self-start rounded-full border border-parchment-dim/30 px-3 py-2 text-md text-parchment-dim">
                                     Coming soon
                                 </span>
                             )}

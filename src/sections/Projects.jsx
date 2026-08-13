@@ -135,29 +135,29 @@ export const Projects = () => {
             <div className="glass rounded-2xl flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black/50 w-full max-w-6xl">
                 {currentProject.texture && <img src={currentProject.texture} alt={currentProject.title} className="w-full rounded-lg" />}
                 <div className="border-b border-gold/30 pb-3 mb-2">
-                    <p className="text-parchment text-lg font-bold">{currentProject.title}</p>
+                    <p className="text-parchment text-xl font-bold">{currentProject.title}</p>
                 </div>
                 <div className="space-y-2">
                     <div className="flex justify-between">
-                        <span className="text-parchment-dim text-sm uppercase tracking-wide">Role</span>
-                        <p className="text-parchment text-sm font-medium">{currentProject.role}</p>
+                        <span className="text-parchment-dim text-md uppercase tracking-wide">Role</span>
+                        <p className="text-parchment text-md font-medium">{currentProject.role}</p>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-parchment-dim text-sm uppercase tracking-wide">Studio</span>
-                        <p className="text-parchment text-sm font-medium">{currentProject.studio}</p>
+                        <span className="text-parchment-dim text-md uppercase tracking-wide">Studio</span>
+                        <p className="text-parchment text-md font-medium">{currentProject.studio}</p>
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                     {currentProject.genres.map((genre, genreIndex) => (
-                        <button key={genreIndex} className="px-3 py-1 bg-gold/20 border border-parchment-dim text-parchment-dim rounded-lg hover:bg-gold/30 transition-colors text-lg glow-text">
+                        <button key={genreIndex} className="px-3 py-1 bg-gold/20 border border-parchment-dim text-parchment-dim rounded-lg hover:bg-gold/30 transition-colors text-xl glow-text">
                             {genre} 
                         </button>
                     ))}
                 </div>
-                <p className="text-parchment text-sm leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: currentProject.blurb }} />
+                <p className="text-parchment text-md leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: currentProject.blurb }} />
                 <div className="flex flex-wrap gap-2">
                     {currentProject.tags.map((tag, tagIndex) => (
-                        <button key={tagIndex} className="px-3 py-1 bg-stone/20 border border-parchment-dim text-parchment-dim rounded-lg hover:bg-gold/30 transition-colors text-sm">
+                        <button key={tagIndex} className="px-3 py-1 bg-stone/20 border border-parchment-dim text-parchment-dim rounded-lg hover:bg-gold/30 transition-colors text-md">
                             {tag}
                         </button>
                     ))}
@@ -165,13 +165,13 @@ export const Projects = () => {
                 <Button size="lg" as="a" href={currentProject.link} target="_blank">{currentProject.link_label}</Button>
             </div>
             <div className="flex items-center gap-5">
-                <button onClick={handlePrev} className="text-2xl px-4 py-2 text-parchment-dim hover:text-gold transition-colors">
+                <button onClick={handlePrev} className="text-3xl px-4 py-2 text-parchment-dim hover:text-gold transition-colors">
                     ← Previous
                 </button>
                 <span className="text-parchment-dim">
                     {currentIndex + 1} / {PROJECTS.length}
                 </span>
-                <button onClick={handleNext} className="text-2xl px-4 py-2 text-parchment-dim hover:text-gold transition-colors">
+                <button onClick={handleNext} className="text-3xl px-4 py-2 text-parchment-dim hover:text-gold transition-colors">
                     Next →
                 </button>
             </div>
@@ -182,13 +182,13 @@ export const Projects = () => {
                     <div className="flex flex-col gap-4">
                         {mediaPageCount > 1 && (
                             <div className="flex items-center justify-between">
-                                <button onClick={handleMediaPrev} className="text-sm px-3 py-1 text-parchment-dim hover:text-gold transition-colors">
+                                <button onClick={handleMediaPrev} className="text-md px-3 py-1 text-parchment-dim hover:text-gold transition-colors">
                                     ← Previous
                                 </button>
-                                <span className="text-parchment-dim text-sm">
+                                <span className="text-parchment-dim text-md">
                                     {mediaPage + 1} / {mediaPageCount}
                                 </span>
-                                <button onClick={handleMediaNext} className="text-sm px-3 py-1 text-parchment-dim hover:text-gold transition-colors">
+                                <button onClick={handleMediaNext} className="text-md px-3 py-1 text-parchment-dim hover:text-gold transition-colors">
                                     Next →
                                 </button>
                             </div>
@@ -230,7 +230,7 @@ export const Projects = () => {
                                                 target="_blank"
                                                 rel="noreferrer"
                                                 onClick={(event) => event.stopPropagation()}
-                                                className="text-gold text-sm text-center hover:underline"
+                                                className="text-gold text-md text-center hover:underline"
                                             >
                                                 {media.link_label || "View media"}
                                             </a>
@@ -242,8 +242,8 @@ export const Projects = () => {
                         </div>
                     </div>
                 )}
-                <p className="text-parchment text-3xl font-bold">{currentProject.title}</p>
-                <p className="text-parchment text-lg leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: currentProject.description }} />
+                <p className="text-parchment text-4xl font-bold">{currentProject.title}</p>
+                <p className="text-parchment text-xl leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: currentProject.description }} />
             </div>
         </div>
         {expandedMedia && (
@@ -252,7 +252,7 @@ export const Projects = () => {
                     <button
                         type="button"
                         onClick={handleCloseMedia}
-                        className="self-end text-parchment-dim hover:text-gold transition-colors text-sm"
+                        className="self-end text-parchment-dim hover:text-gold transition-colors text-md"
                     >
                         Close ×
                     </button>
@@ -273,7 +273,7 @@ export const Projects = () => {
                             href={expandedMedia.link}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-gold text-sm text-center hover:underline"
+                            className="text-gold text-md text-center hover:underline"
                         >
                             {expandedMedia.link_label || "View media"}
                         </a>

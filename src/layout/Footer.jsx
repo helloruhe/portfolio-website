@@ -2,7 +2,7 @@
     return (
         <footer className="border-t border-gold/20 bg-black/40 backdrop-blur-sm">
             <div className="mx-auto px-10 py-8 xl:px-20">
-                <div className="space-y-4 text-center text-sm text-parchment-dim">
+                <div className="space-y-4 text-center text-md text-parchment-dim">
                     <p>
                         © {new Date().getFullYear()} Ariana Tranumn. All rights reserved.
                     </p>

@@ -18,9 +18,9 @@ export const Skills = () => {
                         <div className="w-12 h-12 rounded-xl bg-parchment/10 flex items-center justify-center mb-4 hover:bg-gold/20">
                         <item.icon className="w-6 h-6 text-parchment" />
                         </div>
-                        <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
-                        <p className="text-sm text-muted-foreground">
-                            <div className="grid grid-cols-3 gap-2">
+                        <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+                        <p className="text-md text-muted-foreground">
+                            <div className="grid grid-cols-3 gap-3">
                             {item.tags.map((itemtag, idx) => (
                                 <p className="rounded-full bg-stone-mid px-4 py-2 justify-center flex hover:bg-gold/20">{itemtag}</p>
                             ))}
@@ -36,12 +36,12 @@ export const Skills = () => {
                     {EDUCATION.map((school, index) => (
                         <div className="flex flex-col lg:flex-row lg:items-center justify-between">
                             <div>
-                                <h3 className="text-lg font-semibold md:text-2xl">{school.school}</h3>
-                                <p className="font-light text-md text-parchment-dim">{school.degree}</p>
-                                <p className="font-light text-md text-muted-light">{school.note}</p>
+                                <h3 className="text-xl font-semibold md:text-3xl">{school.school}</h3>
+                                <p className="font-light text-lg text-parchment-dim">{school.degree}</p>
+                                <p className="font-light text-lg text-muted-light">{school.note}</p>
                             </div>
                             <div>
-                                <p className="font-light text-md text-muted-light">{school.year}</p>
+                                <p className="font-light text-lg text-muted-light">{school.year}</p>
                             </div>
                         </div>
                     ))}

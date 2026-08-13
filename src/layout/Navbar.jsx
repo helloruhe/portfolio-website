@@ -32,7 +32,7 @@ export const Navbar = () => {
       <nav className="container mx-auto px-6 flex items-center justify-between">
         <a
           href="#"
-          className="text-xl tracking-light hover:text-gold glow-text"
+          className="text-2xl tracking-light hover:text-gold glow-text"
         >
           Ariana Tranumn<br/><em>Game and Narrative Designer</em><span className="text-parchment-dim"></span>
         </a>
@@ -44,7 +44,7 @@ export const Navbar = () => {
               <a
                 href={link.href}
                 key={index}
-                className="px-4 py-2 text-sm text-parchment-dim rounded-full hover:text-gold hover:bg-stone-border"
+                className="px-4 py-2 text-md text-parchment-dim rounded-full hover:text-gold hover:bg-stone-border"
               >
                 {link.label}
               </a>
@@ -78,7 +78,7 @@ export const Navbar = () => {
                 href={link.href}
                 key={index}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-parchment-dim hover:text-gold py-2"
+                className="text-xl text-parchment-dim hover:text-gold py-2"
               >
                 {link.label}
               </a>

@@ -26,16 +26,16 @@ export const Hero = () => {
 
                 <div className="lg:text-left gap-5">
                     {/* Text */}
-                    <h1 className="text-5xl glow-text md:text-6xl lg:text-7xl leading-tight animate-fade-in animation-delay-100">
+                    <h1 className="text-6xl glow-text md:text-7xl lg:text-8xl leading-tight animate-fade-in animation-delay-100">
                         <span className="text-parchment">About Me</span>
                     </h1>
                     <br/>
-                    <h2 className="text-lg glow-text leading-tight animate-fade-in animation-delay-100">
+                    <h2 className="text-xl glow-text leading-tight animate-fade-in animation-delay-100">
                         <MapPin className="inline-block mr-2" />
                         <span className="text-parchment">New York, NY</span>
                     </h2>
                     <br/>
-                    <p className="text-lg text-parchment-dim max-w-lg animate-fade-in">
+                    <p className="text-xl text-parchment-dim max-w-lg animate-fade-in">
                         Hi! My name is Ariana <em>(she/her)</em>. I am a <strong>Software Engineering</strong> student with a passion and interest in Game Development. I am a Game Designer with AA studio experience and a Narrative Designer.<br/><br/> I have also been writing since a young age, crafting narratives and worlds for my own stories and games. I have worked on <strong>Crusader Kings III</strong>, a grand strategy/RPG hybrid game set in the medieval period. I am also the team lead for <strong>Warcraft: Guardians of Azeroth II</strong>, a total conversion mod for Crusader Kings III.<br/><br/>
                     </p>
 
