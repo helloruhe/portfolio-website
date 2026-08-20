@@ -36,7 +36,7 @@ export const Hero = () => {
                     </h2>
                     <br/>
                     <p className="text-xl text-parchment-dim max-w-lg animate-fade-in">
-                        Hi! My name is Ariana <em>(she/her)</em>. I am a <strong>Software Engineering</strong> student with a passion and interest in Game Development. I am a Game Designer with AA studio experience and a Narrative Designer.<br/><br/> I have also been writing since a young age, crafting narratives and worlds for my own stories and games. I have worked on <strong>Crusader Kings III</strong>, a grand strategy/RPG hybrid game set in the medieval period. I am also the team lead for <strong>Warcraft: Guardians of Azeroth II</strong>, a total conversion mod for Crusader Kings III.<br/><br/>
+                        Hi! My name is Ariana <em>(she/her)</em>. I am a Narrative Designer with AA studio experience and a background in writing and Software Engineering.  I have also been writing since a young age, crafting narratives and worlds for my own stories and games.<br/><br/>I have worked on <strong>Crusader Kings III</strong>, a grand strategy/RPG hybrid game set in the medieval period. I am also the team lead for <strong>Warcraft: Guardians of Azeroth II</strong>, a total conversion mod for Crusader Kings III.<br/><br/>As a <strong>Software Engineering</strong> student, I have developed strong problem-solving skills, accompanied by the ability to work with complex systems, collaborate, and see a game world as an interconnected "web", with all disciplines spinning off of one another.<br/><br/>
                     </p>
 
                     {/* Socials */}
