@@ -72,7 +72,7 @@ const SKILLS = [
     {   
         icon: Toolbox,
         name: "Frameworks/Engines/Tools",
-        tags: [".NET", "WPF", "WinForms", "Godot", "Unity", "UE5", "Blender", "Figma", "SQL"],
+        tags: [".NET", "WPF", "WinForms", "Godot", "Unity", "Unreal Engine 5", "SQL", "Git", "Jira"],
     }
 ]
 
