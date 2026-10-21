@@ -58,6 +58,13 @@ const SAMPLES = [
         link: "https://drive.google.com/file/d/1w9HW5Jt7FhjfN4rdx-bHm0AqqMAzGG4R/view?usp=drive_link",
     },
     {
+        title: "Jam Narrative Design Document",
+        description: "This document outlines the narrative design for a game jam project, showcasing character and location designs, attacks/defenses, logline, and world-building elements.",
+        image: "https://images.pexels.com/photos/8656371/pexels-photo-8656371.jpeg",
+        tags: ["Narrative Design"],
+        link: "https://docs.google.com/presentation/d/1Tt76sxmSl--yp1bQIA5iq9KTRxaI6JalnJmZ0KV3BEg/edit?usp=sharing",
+    },
+    {
         title: "Character Sheet",
         description: "Sample character sheet showing backstory, dialogue barks, and personality.",
         image: "https://images.pexels.com/photos/2106194/pexels-photo-2106194.jpeg",
