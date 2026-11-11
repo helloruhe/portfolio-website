@@ -1,7 +1,5 @@
 import { Mail, Download, MapPin } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Button } from "@/assets/Button";
-import { HeaderText } from "@/assets/HeaderText";
+import { FaGithub, FaLinkedin, FaItchIo } from "react-icons/fa";
 import myphoto from "@/assets/images/cute-pic.jpg";
 
 export const Hero = () => {
@@ -45,6 +43,7 @@ export const Hero = () => {
                             { icon: FaGithub, href: "https://github.com/helloruhe" },
                             { icon: FaLinkedin, href: "https://www.linkedin.com/in/tranumn/" },
                             { icon: Mail, href: "mailto:arianatranumn@gmail.com" },
+                            { icon: FaItchIo, href: "https://atranumn.itch.io/" },
                         ].map((social, idx) => (
                             <a
                                 key={idx}

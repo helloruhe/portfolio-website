@@ -3,10 +3,9 @@ import { Button } from "@/assets/Button";
 import { useEffect, useState } from "react";
 
 // images
-import ck3Banner from "/src/assets/images/crusader_king.avif";
 import tsagaanSar from "/src/assets/images/tsagaan_sar.png";
-import petEagle from "/src/assets/images/pet_eagle_one.png";
 import legacyAdventurer from "/src/assets/images/legacy_adventurer.png";
+import petEagle from "/src/assets/images/pet_eagle_one.png";
 import goaBanner from "/src/assets/images/download.jpeg";
 import elune from "/src/assets/images/elune.png";
 import illidan from "/src/assets/images/illidan.png";
@@ -15,6 +14,22 @@ import tippy from "/src/assets/images/tippy.png";
 import wires from "/src/assets/images/wires.png";
 import cafe_email from "/src/assets/images/cafe_email_1.png";
 import tippy_lines from "/src/assets/images/tippy_lines.png";
+import ep4_keyart from "/src/assets/images/tgp.jpg";
+import ce2_keyart from "/src/assets/images/mpo.jpg";        
+import tgp_1 from "/src/assets/images/tgp_1.png";
+import tgp_2 from "/src/assets/images/tgp_2.png";
+import tgp_3 from "/src/assets/images/tgp_3.png";
+import tgp_4 from "/src/assets/images/tgp_4.png";
+import sunscorned_1 from "/src/assets/images/sunscorned-1.png";
+import sunscorned_2 from "/src/assets/images/sunscorned-2.png";
+import sunscorned_3 from "/src/assets/images/sunscorned-3.gif";
+import sunscorned_4 from "/src/assets/images/sunscorned-4.png";
+import sunscorned_5 from "/src/assets/images/sunscorned-5.png";
+import sunscorned_6 from "/src/assets/images/sunscorned-6.png";
+import sunscorned_7 from "/src/assets/images/sunscorned-7.png";
+import sunscorned_8 from "/src/assets/images/sunscorned-8.png";
+import sunscorned_cover from "/src/assets/images/sunscorned-cover.png";
+
 
 const MEDIA_PER_PAGE_MOBILE = 1;
 const MEDIA_PER_PAGE_DESKTOP = 2;
@@ -46,6 +61,26 @@ const getYouTubeEmbedUrl = (url) => {
     const videoId = getYouTubeVideoId(url);
     return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 };
+
+const ProjectDescription = ({ blocks }) => (
+    <div className="space-y-5 text-parchment-dim">
+        {blocks.map((block, index) => {
+            if (block.type === "heading") {
+                return <h2 key={index} className="text-parchment text-2xl font-bold">{block.text}</h2>;
+            }
+
+            if (block.type === "list") {
+                return (
+                    <ul key={index} className="list-disc list-inside space-y-2 pl-2 marker:text-gold">
+                        {block.items.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}
+                    </ul>
+                );
+            }
+
+            return <p key={index} className="text-xl leading-relaxed">{block.text}</p>;
+        })}
+    </div>
+);
 
 export const Projects = () => {
     const [selectedIndex, setSelectedIndex] = useState(null);
@@ -157,6 +192,10 @@ export const Projects = () => {
                             <span className="text-parchment-dim text-md uppercase tracking-wide">Studio</span>
                             <p className="text-parchment text-md font-medium text-right">{project.studio}</p>
                         </div>
+                        <div className="flex justify-between">
+                            <span className="text-parchment-dim text-md uppercase tracking-wide">Engine</span>
+                            <p className="text-parchment text-md font-medium text-right">{project.engine}</p>
+                        </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {project.genres.map((genre, genreIndex) => (
@@ -165,7 +204,7 @@ export const Projects = () => {
                             </button>
                         ))}
                     </div>
-                    <p className="text-parchment text-md leading-relaxed text-parchment-dim flex-1" dangerouslySetInnerHTML={{ __html: project.blurb }} />
+                    <p className="text-parchment text-md leading-relaxed text-parchment-dim flex-1">{project.blurb}</p>
                     <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag, tagIndex) => (
                             <button key={tagIndex} className="px-3 py-1 bg-stone/20 border border-parchment-dim text-parchment-dim rounded-lg hover:bg-gold/30 transition-colors text-sm">
@@ -174,7 +213,9 @@ export const Projects = () => {
                         ))}
                     </div>
                     <div className="flex flex-col gap-2 mt-auto pt-2">
-                        <Button size="default" as="a" href={project.link} target="_blank">{project.link_label}</Button>
+                        {project.link && (
+                            <Button size="default" as="a" href={project.link} target="_blank">{project.link_label}</Button>
+                        )}
                         <Button size="default" onClick={() => handleOpenProject(projectIndex)}>See More</Button>
                     </div>
                 </div>
@@ -237,9 +278,11 @@ export const Projects = () => {
                                                     allowFullScreen
                                                 />
                                             ) : (
-                                                <img src={media.src} alt={media.caption} className="w-full rounded-lg" />
+                                                <img src={media.src} alt={media.caption || "Project image"} className="w-full rounded-lg" />
                                             )}
-                                            <p className="text-parchment-dim text-base text-center">{media.caption}</p>
+                                            {media.caption?.trim() && (
+                                                <p className="text-parchment-dim text-base text-center">{media.caption}</p>
+                                            )}
                                             {media.link && media.link.trim().length > 0 && (
                                                 <a
                                                     href={media.link}
@@ -258,7 +301,7 @@ export const Projects = () => {
                             </div>
                         </div>
                     )}
-                    <p className="text-parchment text-xl leading-relaxed text-parchment-dim" dangerouslySetInnerHTML={{ __html: selectedProject.description }} />
+                    <ProjectDescription blocks={selectedProject.description} />
                 </div>
             </div>
         )}
@@ -281,9 +324,11 @@ export const Projects = () => {
                             allowFullScreen
                         />
                     ) : (
-                        <img src={expandedMedia.src} alt={expandedMedia.caption} className="w-full rounded-lg max-h-[75vh] object-contain" />
+                        <img src={expandedMedia.src} alt={expandedMedia.caption || "Project image"} className="w-full rounded-lg max-h-[75vh] object-contain" />
                     )}
-                    <p className="text-parchment-dim text-base text-center">{expandedMedia.caption}</p>
+                    {expandedMedia.caption?.trim() && (
+                        <p className="text-parchment-dim text-base text-center">{expandedMedia.caption}</p>
+                    )}
                     {expandedMedia.link && expandedMedia.link.trim().length > 0 && (
                         <a
                             href={expandedMedia.link}
@@ -303,30 +348,84 @@ export const Projects = () => {
 
 const PROJECTS = [
     {
-        title: "Crusader Kings III",
+        title: "Crusader Kings III: Khans of the Steppe",
         studio: "Paradox Interactive",
         role: "Game Designer",
-        blurb: "Shipped player-facing content and in-game systems for one of the most complex grand strategy games in the genre. <br /><br />Credited on the <strong>All Under Heaven</strong> and <strong>Khans of the Steppe</strong> DLCs.",
+        engine: "Clausewitz Engine",
+        blurb: "The winds sweep across the Great Steppe as you look over your people, preparing to ride toward the horizon in search of greener pastures, lands to conquer, and new treasures to claim.",
         genres: ["Grand Strategy", "Historical", "RPG"],
         tags: ["Narrative Design"],
-        link: "https://www.paradoxinteractive.com/games/crusader-kings-iii/",
+        link: "https://www.paradoxinteractive.com/games/crusader-kings-iii/add-ons/crusader-kings-iii-khans-of-the-steppe",
         link_label: "Game Link",
-        texture: ck3Banner,
-        description: "<h2 class=\"text-parchment text-2xl font-bold mb-2\">Project Overview</h2><br />Crusader Kings III is a grand strategy game developed by Paradox Interactive, focusing on the medieval period and complex political and dynastic systems.<br /><br />As Game Designer on <strong>All Under Heaven</strong> and <strong>Khans of the Steppe</strong> DLCs, I created immersive experiences for players via in game decisions, events, and other narrative content.<br /><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Some of my contributions:</h2><br /><ul class=\"list-disc list-inside space-y-2 pl-2 marker:text-gold\"><li>The variation of the Feast Activity - the <em>Tsagaan Sar</em>. For Mongolic and Steppe rulers, these events brought an ancient tradition to life. I wrote and designed events that reflect real customs and games played by Steppe peoples, yet still keeping it relevant within the context of the game.<br /><br /></li><li>The Pet Eagle - a unique companion only available to steppe rulers, expanding on the game's existing pet system. This pet is <em>unique</em>, as I created custom events and scenarios for the player to train and really learn the personality of their eagle, compared to other pets in the game which are more generic. They also assist the ruler in Falconry!</li></ul><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Questions and Challenges:</h2><br /><ul class=\"list-disc list-inside space-y-2 pl-2 marker:text-gold\"><li>Is this event a result of, or will influence the player's actions?</li><li>Does this event punish the player for no reason?</li><li>Will this event create interesting, meaningful choices for the player that effects the game state?</li><li>Was something like this likely to happen, given the historical context?</li><li>If this is not an event, or if if this is an event with no options: What is the <em>purpose</em> for this content?</li><br/><h2 class=\"text-parchment text-2xl font-bold mb-2\">Learning Outcomes:</h2><br /><li>While writing any localization text, I always ensured it was historically accurate, following the style guide provided by my design leads, and kept the length appropriate to prevent reading fatigue.</li><li>Sometimes, gameplay trumps narrative. However, this isn't something you want to make apparent to players, so it is best to blend both accordingly</li></ul>",
+        texture: ce2_keyart,
+        description: [
+            { type: "heading", text: "Project Overview" },
+            { type: "paragraph", text: "Crusader Kings III is a grand strategy game developed by Paradox Interactive, focused on the medieval period and complex political and dynastic systems. As a Game Designer on Khans of the Steppe, I created immersive player experiences through in-game decisions, events, and narrative content." },
+            { type: "heading", text: "Some of My Contributions" },
+            { type: "list", items: [
+                "Designed Tsagaan Sar, a variation of the Feast activity for Mongolic and Steppe rulers. Its events bring an ancient tradition to life through customs and games adapted to the context of the game.",
+                "Created the Pet Eagle, a unique companion for Steppe rulers, with custom events and scenarios that let players train and learn their eagle's personality. The eagle can also assist the ruler in Falconry."
+            ] },
+            { type: "heading", text: "Questions and Challenges" },
+            { type: "list", items: [
+                "Is this event a result of, or will it influence, the player's actions?",
+                "Does this event punish the player for no reason?",
+                "Will this event create interesting, meaningful choices that affect the game state?",
+                "Was something like this likely to happen, given the historical context?",
+                "If this is an event with no options, what is the purpose of this content?"
+            ] },
+            { type: "heading", text: "Learning Outcomes" },
+            { type: "list", items: [
+                "I ensured localization text was historically accurate, followed the design style guide, and stayed an appropriate length to prevent reading fatigue.",
+                "Gameplay sometimes takes priority over narrative; the challenge is to blend both without making that tradeoff apparent to players."
+            ] }
+        ],
         gallery: [
             {
                 src: tsagaanSar,
-                caption: "Tsagaan Sar opening event — a custom variation on the feast activity",
+                caption: "Tsagaan Sar opening event - a custom variation on the feast activity",
                 link: "https://forum.paradoxplaza.com/forum/developer-diary/dev-diary-167-the-greatest-of-them-all.1733816/",
                 link_label: "Developer Diary",
             },
             {
                 src: petEagle,
-                caption: "Pet eagle event — a unique companion available to steppe rulers",
+                caption: "Pet eagle event - a unique companion available to steppe rulers",
             },
             {
                 src: legacyAdventurer,
-                caption: "Legacy of the Adventurer decision — sandbox decision for good-aligned players",
+                caption: "Legacy of the Adventurer decision - sandbox decision for benevolent players",
+            }
+        ],
+    },
+    {
+        title: "Crusader Kings III: All Under Heaven",
+        studio: "Paradox Interactive",
+        role: "Game Designer",
+        engine: "Clausewitz Engine",
+        blurb: "In All Under Heaven – the game’s fourth Major Expansion – the map extends to Asia to include the rich and storied lands of China, Japan, and Southeast Asia. Lead legendary warrior houses, manage vast empires and navigate intricate power struggles in this vibrant region filled with history, culture and innovation.",
+        genres: ["Grand Strategy", "Historical", "RPG"],
+        tags: ["Narrative Design"],
+        link: "https://www.paradoxinteractive.com/games/crusader-kings-iii/add-ons/crusader-kings-iii-all-under-heaven",
+        link_label: "Game Link",
+        texture: ep4_keyart,
+        description: [
+            { type: "heading", text: "Project Overview" },
+            { type: "paragraph", text: "Crusader Kings III is a grand strategy game developed by Paradox Interactive, focused on the medieval period and complex political and dynastic systems. As a Game Designer on All Under Heaven, I created immersive player experiences through in-game decisions, events, and narrative content." },
+            { type: "heading", text: "Some of My Contributions" },
+            { type: "paragraph", text: "I created player-facing decisions, events, and narrative content for this DLC, similar to my work on Khans of the Steppe." }
+        ],
+        gallery: [
+            {
+                src: tgp_1
+            },
+            {
+                src: tgp_2
+            },
+            {
+                src: tgp_3
+            },
+            {
+                src: tgp_4
             }
         ],
     },
@@ -334,12 +433,32 @@ const PROJECTS = [
         title: "Warcraft: Guardians of Azeroth 2",
         studio: "Independent Mod Team",
         role: "Team Lead and Developer",
+        engine: "Clausewitz Engine",
         genres: ["Grand Strategy", "Fantasy", "RPG"],
         tags: ["Narrative Design", "Modding", "Systems Design"],
-        blurb: "Led the team of a total conversion mod set in ABK's Warcraft universe, bringing the First War and Reign of Chaos to Crusader Kings III. <strong>100,000+ subscribers</strong> on Steam Workshop.",
+        blurb: "Relive the harrowing years of strife first told in the beloved strategy games and the early years of World of Warcraft as you chart a new saga for Azeroth and cement a legacy to last the ages.",
         link: "https://steamcommunity.com/sharedfiles/filedetails/?id=2949767945",
         link_label: "Steam Workshop",
-        description: "<h2 class=\"text-parchment text-2xl font-bold mb-2\">Project Overview</h2><br />Warcraft: Guardians of Azeroth 2 is a mod for Crusader Kings III. It transforms the medieval world present in the vanilla game to the ever-changing, resilient world of Azeroth. The mod features many events and systems from ABK'S <em>Warcraft III</em> and <em>World of Warcraft</em> in the sense of Crusader Kings. It also contains many original events, story choices, and narratives.<br /><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Some of my contributions:</h2><br />As a designer for the mod, I've created player-facing content and in-game systems that enhance the Warcraft experience within Crusader Kings III. This includes designing events, decisions, and narrative content that align with the lore and mechanics of the Warcraft universe, but also allows for sandbox-like gameplay for players to create their own variation of Warcraft within Crusader Kings III.<br /><br />As team lead, I've created and enforced development standards, direct release management, and coordinated the efforts of the development team to ensure high-quality content and smooth project progression. I've also organized community events and giveaways in our discord with over <strong>8,000 members</strong>, and spoken at ModCon on behalf of the team.<br /><br /><strong>Similar to my experience and responsibilities on <em>Crusader Kings III</em>, I have also contributed the following to the mod</strong>:<br/><ul class=\"list-disc list-inside space-y-2 pl-2 marker:text-gold\"><li>Designed, implemented, and scoped the complex in-game magic system: Taking inspiration from Warcraft III and World of Warcraft, I've converted many spells to work in the context of CK3, as well as implemented completely new spell ideas.<br /><br /></li><li>Created sandbox-like content in the Warcraft Universe: What if Elisande didn't join the legion? Or Arthas stayed a light-wielding Paladin instead of dawning the mantle of The Lich King? What would Azeroth be like if the Empire of Zul returned? I have designed and written events, decisions, and flavor texts allowing the players to essentially create their own version of Warcraft within Crusader Kings III.<br /><br /></li><li>Along with being a long time contributor and community manager, I have also taken on somewhat of a producer role: Maintaining documentation, scoping releases and setting release dates around Crusader Kings III patch times for the best player experience, as well as facilitate effective communication between our world-wide development team.</li></ul><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Questions and Challenges:</h2><br /><ul class=\"list-disc list-inside space-y-2 pl-2 marker:text-gold\"><li>Why would this character in Warcraft make this choice?</li><li>How can we make this mechanic or event, once in Warcraft, make sense in CK3?</li><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Learning Outcomes:</h2><br /><li>As a Narrative Designer, I will likely have to work with someone elses story. I learned to bring that story to life in a meaningful way, without changing it completely, and making these changes accessible (and even exciting!) to players.</li></ul>",
+        description: [
+            { type: "heading", text: "Project Overview" },
+            { type: "paragraph", text: "Warcraft: Guardians of Azeroth 2 is a Crusader Kings III total-conversion mod that transforms the medieval world into Azeroth. It adapts events and systems from Warcraft III and World of Warcraft to the CK3 format, alongside original events, story choices, and narratives." },
+            { type: "heading", text: "Some of My Contributions" },
+            { type: "paragraph", text: "As a designer, I created player-facing content and in-game systems that bring the Warcraft experience into Crusader Kings III, balancing the source universe's lore and mechanics with sandbox gameplay." },
+            { type: "paragraph", text: "As team lead, I established development standards, managed releases, coordinated the development team, organized community events for a Discord community of over 8,000 members, and represented the team at ModCon." },
+            { type: "list", items: [
+                "Designed, implemented, and scoped the in-game magic system, adapting spells from Warcraft III and World of Warcraft and introducing new spell concepts.",
+                "Created sandbox content through events, decisions, and flavor text that lets players explore alternate possibilities in the Warcraft universe.",
+                "Maintained documentation, scoped releases, coordinated release dates around Crusader Kings III patches, and supported communication across the worldwide development team."
+            ] },
+            { type: "heading", text: "Questions and Challenges" },
+            { type: "list", items: [
+                "Why would this Warcraft character make this choice?",
+                "How can a mechanic or event from Warcraft make sense within Crusader Kings III?",
+                "What are things we can expand on in this mod that might not be possible within the original Warcraft games?"
+            ] },
+            { type: "heading", text: "Learning Outcomes" },
+            { type: "paragraph", text: "I learned to bring an existing story to life in a meaningful way without changing it completely, while making those adaptations accessible and exciting to players." }
+        ],
         texture: goaBanner,
         gallery: [
             {
@@ -348,31 +467,100 @@ const PROJECTS = [
             },
             {
                 src: elune,
-                caption:
-                    "An event displaying the schisms between Elven culture in Warcraft, integrated with CK3 Mechanics",
+                caption: "An event displaying the schisms between Elven culture in Warcraft, integrated with CK3 Mechanics",
             },
             {
                 src: illidan,
-                caption:
-                    "GUI showcasing the in-game magic system inspired by Warcraft spells",
+                caption: "GUI showcasing the in-game magic system inspired by Warcraft spells",
             },
             {
                 src: crisisGui,
-                caption:
-                    "A Crisis Event, expanding on Warcrafts' major lore events from a ruler's perspective",
+                caption: "A Crisis Event, expanding on Warcrafts' major lore events from a ruler's perspective",
             },
         ],
     },
     {
-        title: "Project: Cafe",
+        title: "Sunscorned",
+        studio: "Game Jam Group",
+        role: "Technical Narrative Designer",
+        engine: "Unreal Engine 5",
+        genres: ["Dungeon Crawler", "Horror", "Fantasy"],
+        tags: ["Narrative Design", "Game Design", "Programming"],
+        blurb: "On the Isle of Lumina where Vampires reign, one uses the famed Violet Sepulcher to bring about eternal night and the curse of Nightbane, effectively ending the thousand-year peace between human and vampire. After half-vampire Matthias loses his mother to the curse, he must traverse the perilous dungeons of a vampiric castle to destroy the relic and restore the sun to its rightful place.",
+        link: "https://mrdj2u.itch.io/sunscorned",
+        link_label: "Game Link",
+        texture: sunscorned_cover,
+        description: [
+            { type: "heading", text: "Project Overview" },
+            { type: "paragraph", text: "Sunscorned was a game jam project submitted to the Vampire Horror Jam 3D 2026. I worked with a small team in Unreal Engine 5 to create a horror themed game featuring vampires within 1 month." },
+            { type: "heading", text: "Some of My Contributions" },
+            { type: "paragraph", text: "As the Technical Narrative Designer, I was responsible for crafting the story, and lore within the game. I wrote in-game lore text, dialogue barks, as well as designed narrative systems in Unreal Engine 5 using Blueprints and C++." },
+            { type: "list", items: [
+                "Created character and location reference sheets for our artists",
+                "Wrote in-game lore text and dialogue barks",
+                "Designed narrative systems in Unreal Engine 5 using Blueprints and C++",
+            ] },
+            { type: "heading", text: "Questions and Challenges" },
+            { type: "list", items: [
+                "How can the player learn the story in an engaging and immersive way?",
+                "What are ways we can express narrative outside of traditional dialogue and cut scenes?",
+                "Can a meaningful game really be made in such a short timeframe?"
+            ] },
+            { type: "heading", text: "Learning Outcomes" },
+            { type: "paragraph", text: "I learned how to work with and minimize scope in a game project, while still delivering a digestible way for players to experience our story." }
+        ],
+        gallery: [
+            {
+                src: sunscorned_8,
+            },
+            {
+                src: sunscorned_1,
+            },
+            {
+                src: sunscorned_2,
+            },
+            {
+                src: sunscorned_3,
+            },
+            {
+                src: sunscorned_8,
+            },
+            {
+                src: sunscorned_4,
+            },
+            {
+                src: sunscorned_5,
+            },
+            {
+                src: sunscorned_6,
+            }
+        ],
+    },
+    {
+        title: "Tippy's Cafe",
         studio: "Sunday Studios",
         role: "Game/Narrative Designer, Programmer",
+        engine: "Godot",
         genres: ["Management", "Simulation"],
-        tags: ["Game Design", "Narrative Design", "Programming", "Godot"],
-        blurb: "Wrote witty and clever flavor text, designed engaging mini games, and iterated continuously on player feedback.",
+        tags: ["Game Design", "Narrative Design", "Programming"],
+        blurb: "Play as Sato, a Chinese immigrant dealing with the closure of his beloved King of Comics cafe as it is taken over by the AI-powered Tippy's Cafe.",
         link: "https://www.sundaystudiosgames.com/",
         link_label: "Studio Link",
-        description: "<h2 class=\"text-parchment text-2xl font-bold mb-2\">Project Overview</h2><br />Project: Cafe is an upcoming management sim game. In this game, you play as a Chinese Immigrant who works at a cafe. He aspires to write comics and craft stories, even as he struggles in his day job. He becomes the manager of cAIfe, along with his money-hungry boss replacing all of his other coworkers with AI-powered machines.<br /><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Some of my contributions:</h2><br />As a Game/Narrative Designer and Programmer on Project: Cafe, I am responsible for creating and designing engaging mini games, and I wrote flavor text (in the form of the in-game emails system), and wrote dialogue barks for our protagonist character, Tippy, all to bring you in the world of our worker with a tyrannical AI-loving boss!<br /><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Questions and Challenges:</h2><br /><ul class=\"list-disc list-inside space-y-2 pl-2 marker:text-gold\"><li>How can we make the mini games fun and engaging, yet not too difficult or time consuming?</li><li>Is it even possible to incorporate narrative elements in such a gameplay heavy game?</li><li>What is the best way to present tutorials and narrative content without causing too much confusion?</li><br /><h2 class=\"text-parchment text-2xl font-bold mb-2\">Learning Outcomes:</h2><br /><li>Working on Project: Cafe has showed me that iteration is key, and the need for QA is essential. Without the feedback we got from our testers, the gameplay would have been egregiously difficult, hard to understand, and almost impossible to master.</li></ul><br/><br/><em>All art assets featured were made by our talented artists at Sunday Studios.</em>",
+        description: [
+            { type: "heading", text: "Project Overview" },
+            { type: "paragraph", text: "Tippy's Cafe is an upcoming management sim. You play as a Chinese immigrant working at a cafe while aspiring to write comics and craft stories. He becomes the manager of cAIfe as his money-hungry boss replaces coworkers with AI-powered machines." },
+            { type: "heading", text: "Some of My Contributions" },
+            { type: "paragraph", text: "As a Game/Narrative Designer and Programmer, I designed engaging mini games, wrote flavor text for the in-game email system, and wrote dialogue barks for Tippy, bringing the world of a worker with a tyrannical, AI-loving boss to life." },
+            { type: "heading", text: "Questions and Challenges" },
+            { type: "list", items: [
+                "How can mini games be fun and engaging without becoming too difficult or time consuming?",
+                "How can narrative elements be incorporated into a gameplay-heavy game?",
+                "What is the best way to present tutorials and narrative content without causing confusion?"
+            ] },
+            { type: "heading", text: "Learning Outcomes" },
+            { type: "paragraph", text: "I learned that iteration and QA are essential. Tester feedback helped make the gameplay easier to understand, less frustrating, and more enjoyable to master." },
+            { type: "paragraph", text: "All art assets featured were made by the talented artists at Sunday Studios." }
+        ],
         texture: tippy,
         gallery: [
             {
@@ -381,11 +569,11 @@ const PROJECTS = [
             },
             {
                 src: cafe_email,
-                caption: "An email you get from your boss, filled with corporate jargon, explaining how he 'improved' the AI. Spoiler: he makes it worse, along with so called 'improvements'",
+                caption: "An email from your boss, filled with corporate jargon, explaining how he 'improved' the AI.",
             },
             {
                 src: tippy_lines,
-                caption: "Some dialogue lines I wrote for Tippy, who is a money-hungry, sarcastic, and AI-loving character working for the boss.",
+                caption: "Dialogue lines for Tippy, a money-hungry, sarcastic, and AI-loving character working for the boss.",
             },
         ],
     },
